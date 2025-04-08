@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#1a2639">
     <title>Ambar B Capoor | Cinematographer</title>
     <link rel="preconnect" href="https://player.vimeo.com">
@@ -32,7 +32,6 @@
             color: var(--text-light);
             line-height: 1.6;
             padding-top: 80px;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
         
         @media (prefers-color-scheme: dark) {
@@ -56,14 +55,17 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background: black;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            overflow: hidden;
         }
         
         #splash-video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -305,24 +307,9 @@
                 margin-bottom: 1.5rem;
             }
         }
-        function resizeVideo() {
-    const video = document.getElementById('splash-video');
-    const container = document.getElementById('splash');
-    const containerRatio = container.offsetWidth / container.offsetHeight;
-    const videoRatio = video.videoWidth / video.videoHeight;
-    
-    if (containerRatio > videoRatio) {
-        video.style.width = '100%';
-        video.style.height = 'auto';
-    } else {
-        video.style.width = 'auto';
-        video.style.height = '100%';
-    }
-}
     </style>
 </head>
 <body>
-    
     <!-- Splash Screen -->
     <div id="splash">
         <video id="splash-video" autoplay muted playsinline>
@@ -428,7 +415,7 @@
                         </div>
                     </div>
 
-                       <div class="video-card">
+                    <div class="video-card">
                         <div class="video-container">
                             <iframe src="https://player.vimeo.com/video/979355985" loading="lazy" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                         </div>
@@ -437,7 +424,6 @@
                             <p>Neighbourly Love</p>
                         </div>
                     </div>
-                
                 </div>
             </section>
 
@@ -503,6 +489,26 @@
         // Fallback for slow connections or video errors
         setTimeout(hideSplash, 10000);
         video.addEventListener("error", hideSplash);
+        
+        // Video resizing function
+        function resizeVideo() {
+            const video = document.getElementById('splash-video');
+            const container = document.getElementById('splash');
+            const containerRatio = container.offsetWidth / container.offsetHeight;
+            const videoRatio = video.videoWidth / video.videoHeight;
+            
+            if (containerRatio > videoRatio) {
+                video.style.width = '100%';
+                video.style.height = 'auto';
+            } else {
+                video.style.width = 'auto';
+                video.style.height = '100%';
+            }
+        }
+        
+        // Initialize video sizing
+        video.addEventListener('loadedmetadata', resizeVideo);
+        window.addEventListener('resize', resizeVideo);
         
         // Load fonts if they haven't loaded yet
         if (document.fonts) {
