@@ -18,12 +18,12 @@
 }
 
 body {
-    .abril-fatface-regular {
-        font-family: "Abril Fatface", serif;
-        font-weight: 400;
-        font-style: normal;
-      }
-      
+    font-family: "Abril Fatface", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text-color);
+    background-color: var(--white);
+    padding-top: 80px; /* Added for fixed header */
 }
 
 .header {
@@ -81,6 +81,7 @@ body {
 
 .main-content {
     padding: 0 var(--spacing);
+    margin-top: var(--spacing);
 }
 
 .work-grid {
@@ -185,6 +186,43 @@ body {
     border-top: 1px solid rgba(0,0,0,0.05);
 }
 
+/* Splash Screen Styles */
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+#splash-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skip-btn {
+    position: fixed;
+    top: max(20px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1rem;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .work-grid {
@@ -231,26 +269,11 @@ body {
     .about-text, .contact-content {
         font-size: 1rem;
     }
-}
-
-#splash {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
-
-#splash-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-}
-
-@media (orientation: portrait) {
-    #splash-video { width: 100%; height: auto; }
-}
-@media (orientation: landscape) {
-    #splash-video { width: auto; height: 100%; }
+    
+    #splash-video {
+        width: auto;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
