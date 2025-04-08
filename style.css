@@ -232,3 +232,25 @@ body {
         font-size: 1rem;
     }
 }
+
+#splash {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#splash-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+}
+
+@media (orientation: portrait) {
+    #splash-video { width: 100%; height: auto; }
+}
+@media (orientation: landscape) {
+    #splash-video { width: auto; height: 100%; }
+}
